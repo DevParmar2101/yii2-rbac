@@ -74,4 +74,12 @@ class SignupForm extends Model
             'status'=>'Is Active?'
         ];
     }
+
+    public static function getList()
+    {
+        return [
+            'admin' => 'Administator',
+            'user' => 'User'
+        ];
+    }
 }
