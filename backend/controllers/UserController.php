@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use backend\models\SignupForm;
 use Yii;
 use common\models\User;
 use common\models\UserSearch;
@@ -63,15 +64,18 @@ class UserController extends Controller
      */
     public function actionCreate()
     {
-        $model = new User();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
+        $user = new SignupForm();
+        $user->scenario = 'user-create';
+        $user->role = 'user';
+        if ($user->load(Yii::$app->request->post()) &&  $user->validate()) {
+            $user->setUserSignup();
+            Yii::$app->session->setFlash('success', 'User Created Successfully');
+            return $this->redirect('index');
         }
+
+        return $this->render('create', [
+            'model' => $user,
+        ]);
     }
 
     /**
@@ -82,15 +86,34 @@ class UserController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
+        $user = $this->findModel($id);
+        $user_role = '';
+        $role = array_keys(Yii::$app->authManager->getRolesByUser($user->id));
+        if(isset($role[0])){
+            $user->role = $role[0];
+            $user_role = $role[0];
         }
+        if ($user->load(Yii::$app->request->post()) &&  $user->validate()) {
+            $user->updated_at = date('Y-m-d H:i');
+            if(isset($user->password) && $user->password!=''){
+                $user->password_hash=Yii::$app->security->generatePasswordHash($user->password);
+            }
+
+            $user->save();
+
+            if(isset($user->role) && $user->role!="" && $user->role!=$user_role){
+                Yii::$app->authManager->revokeAll($user->id);
+                $auth = Yii::$app->authManager;
+                $authorRole = $auth->getRole($user->role);
+                $auth->assign($authorRole, $user->primaryKey);
+            }
+
+            Yii::$app->session->setFlash('success', 'User Updated Successfully');
+            return $this->redirect('index');
+        }
+        return $this->render('update', [
+            'model' => $user,
+        ]);
     }
 
     /**
