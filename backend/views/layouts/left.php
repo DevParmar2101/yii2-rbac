@@ -1,5 +1,4 @@
 <?php
-$directoryAsset = Yii::$app->assetManager->getPublishedUrl('@backend/web/admin');
 ?>
 
 <aside class="main-sidebar">
@@ -9,7 +8,7 @@ $directoryAsset = Yii::$app->assetManager->getPublishedUrl('@backend/web/admin')
         <!-- Sidebar user panel -->
         <div class="user-panel">
             <div class="pull-left image">
-                <img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="img-circle" alt="User Image"/>
+                <img src="<?= Yii::getAlias('@web/admin/img/user2-160x160.jpg') ?>" class="img-circle" alt="User Image"/>
             </div>
             <div class="pull-left info">
                 <p>Alexander Pierce</p>
