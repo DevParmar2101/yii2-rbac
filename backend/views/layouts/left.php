@@ -1,3 +1,7 @@
+<?php
+$directoryAsset = Yii::$app->assetManager->getPublishedUrl('@backend/web/admin');
+?>
+
 <aside class="main-sidebar">
 
     <section class="sidebar">
