@@ -13,6 +13,7 @@ use yii\web\IdentityInterface;
  *
  * @property integer $id
  * @property string $username
+                 * @property string $role
  * @property string $password_hash
  * @property string $password_reset_token
  * @property string $verification_token
@@ -31,6 +32,12 @@ class User extends ActiveRecord implements IdentityInterface
     const ACTIVE = 'Active';
     const INACTIVE = 'Inactive';
 
+    public $confirm_password;
+    public $old_password;
+    public $new_password;
+
+    public $role;
+    public $password;
 
     /**
      * {@inheritdoc}
@@ -212,4 +219,5 @@ class User extends ActiveRecord implements IdentityInterface
     {
         $this->password_reset_token = null;
     }
+
 }
