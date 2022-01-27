@@ -23,14 +23,23 @@ $this->params['breadcrumbs'][] = $this->title;
             'columns' => [
                 ['class' => 'yii\grid\SerialColumn'],
 
-                'id',
+//                'id',
                 'username',
-                'auth_key',
-                'password_hash',
-                'password_reset_token',
-                // 'email:email',
-                // 'status',
-                // 'created_at',
+//                'auth_key',
+//                'password_hash',
+//                'password_reset_token',
+                 'email:email',
+                 [
+                         'attribute' => 'status',
+                         'value' => function($model) {
+                            if ($model->status == \common\models\User::STATUS_ACTIVE) {
+                                return \common\models\User::ACTIVE;
+                            }else{
+                                return \common\models\User::INACTIVE;
+                            }
+                         }
+                 ],
+                 'created_at:datetime',
                 // 'updated_at',
                 // 'verification_token',
 
