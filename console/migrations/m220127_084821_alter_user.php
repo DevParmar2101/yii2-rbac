@@ -12,7 +12,9 @@ class m220127_084821_alter_user extends Migration
      */
     public function safeUp()
     {
-
+        $query =<<<EOF
+ALTER TABLE `user` ADD `role` VARCHAR(55) NULL DEFAULT NULL AFTER `username`; 
+EOF;
     }
 
     /**
