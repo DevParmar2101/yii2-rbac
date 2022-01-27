@@ -17,7 +17,7 @@ if (Yii::$app->controller->action->id === 'login') {
 } else {
     backend\assets\AdminLteAsset::register($this);
 
-    $directoryAsset = Yii::$app->assetManager->getPublishedUrl('@backend/web');
+    $directoryAsset = Yii::$app->assetManager->getPublishedUrl('@backend/web/admin');
     ?>
     <?php $this->beginPage() ?>
     <!DOCTYPE html>
