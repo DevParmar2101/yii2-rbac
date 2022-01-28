@@ -4,18 +4,28 @@ namespace frontend\models;
 
 use Yii;
 use yii\base\Model;
+use yii\db\ActiveRecord;
+use yii\web\IdentityInterface;
 
 /**
- * ContactForm is the model behind the contact form.
+ * @property integer $id
+ * @property string $name
+ * @property string $email
+ * @property string $subject
+ * @property string $body
  */
-class ContactForm extends Model
+class ContactForm extends ActiveRecord
 {
-    public $name;
-    public $email;
-    public $subject;
-    public $body;
+
     public $verifyCode;
 
+    /**
+     * {@inheritdoc}
+     */
+    public static function tableName()
+    {
+        return '{{%contact_form}}';
+    }
 
     /**
      * {@inheritdoc}
