@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
         </div>
         <div class="col-lg-6">
-            <?= $form->field($model,'dob')->textInput(['autofocus' => true])?>
+            <?= $form->field($model,'dob')->textInput(['type' => 'date', 'autofocus' => true])?>
         </div>
     </div>
 
