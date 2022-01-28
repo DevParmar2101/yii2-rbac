@@ -14,6 +14,7 @@ class m220128_183634_alter_user_channel extends Migration
     {
         $query =<<<EOF
 ALTER TABLE `user_channel` ADD UNIQUE(`channel_name`); 
+ALTER TABLE `user_channel` ADD `channel_profile` VARCHAR(225) NOT NULL AFTER `channel_bio`, ADD `status` SMALLINT(2) NOT NULL AFTER `channel_profile`; 
 EOF;
     $this->execute($query);
     }
