@@ -4,7 +4,7 @@ namespace backend\controllers;
 
 use Yii;
 use common\models\UserChannel;
-use backend\models\UserChannelSearch;
+use common\models\UserChannelSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
