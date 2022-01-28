@@ -14,6 +14,8 @@ class m220128_102404_alter_user_table extends Migration
     {
         $query =<<<EOF
 ALTER TABLE `user` ADD `first_name` VARCHAR(125) NOT NULL AFTER `verification_token`, ADD `last_name` VARCHAR(125) NOT NULL AFTER `first_name`, ADD `dob` VARCHAR(125) NOT NULL AFTER `last_name`; 
+
+ALTER TABLE `user` ADD `dob` TIMESTAMP NOT NULL AFTER `last_name`; 
 EOF;
         $this->execute($query);
     }
