@@ -18,7 +18,7 @@ use yii\widgets\ActiveForm;
 
         <?= $form->field($model, 'subject')->textInput(['maxlength' => true]) ?>
 
-        <?= $form->field($model, 'body')->textInput(['maxlength' => true]) ?>
+        <?= $form->field($model, 'body')->textarea(['rows' => 6,'maxlength' => true]) ?>
 
     </div>
     <div class="box-footer">
