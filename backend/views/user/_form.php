@@ -16,6 +16,26 @@ use yii\widgets\ActiveForm;
         <div class="row-lg">
 
             <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                <?= $form->field($model,'first_name')->textInput(['class' => 'form-control w-100']) ?>
+            </div>
+            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                <?= $form->field($model,'last_name')->textInput(['class' => 'form-control w-100']) ?>
+            </div>
+            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                <?= $form->field($model,'dob')->widget(\kartik\date\DatePicker::class,[
+                    'type' => \kartik\date\DatePicker::TYPE_COMPONENT_APPEND,
+                    'pluginOptions' => [
+                        'autoclose' => true,
+                        'format' => 'dd-M-yyyy'
+                    ]
+                ]); ?>
+            </div>
+
+        </div>
+
+        <div class="row-lg">
+
+            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-xs-12">
                 <?= $form->field($model,'username')->textInput(['class' => 'form-control w-100']); ?>
             </div>
             <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-xs-12">
