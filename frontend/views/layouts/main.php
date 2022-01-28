@@ -59,7 +59,7 @@ AppAsset::register($this);
                             </a>
                             <div class="dropdown-menu dropdown-menu-left dropd" aria-labelledby="navbarDropdownMenuLink">
                                 <a class="dropdown-item text-dark" href="#">Profile</a>
-                                <a class="dropdown-item text-dark" href="#">Create Channel</a>
+                                <a class="dropdown-item text-dark" href="<?= \yii\helpers\Url::toRoute('/site/channel')?>">Create Channel</a>
                                 <a class="dropdown-item text-dark" href="<?= \yii\helpers\Url::toRoute('site/logout')?>" data-method="post">Logout</a>
                             </div>
                         </div>
@@ -81,7 +81,7 @@ AppAsset::register($this);
     <footer class="footer mt-auto py-3 text-muted">
         <div class="container">
             <p class="float-left">&copy; <?= Html::encode(Yii::$app->name) ?> <?= date('Y') ?></p>
-            <p class="float-right"><?= Yii::powered() ?></p>
+            <p class="float-right">Powered by <a href="#"><?= Yii::$app->name?></a></p>
         </div>
     </footer>
 
