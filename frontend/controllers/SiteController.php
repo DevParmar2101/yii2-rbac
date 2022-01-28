@@ -146,6 +146,11 @@ class SiteController extends Controller
         return $this->render('about');
     }
 
+    public function actionChannel()
+    {
+        return $this->render('channel');
+    }
+
     /**
      * Signs user up.
      *
