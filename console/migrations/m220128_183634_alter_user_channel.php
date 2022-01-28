@@ -12,7 +12,10 @@ class m220128_183634_alter_user_channel extends Migration
      */
     public function safeUp()
     {
-
+        $query =<<<EOF
+ALTER TABLE `user_channel` ADD UNIQUE(`channel_name`); 
+EOF;
+    $this->execute($query);
     }
 
     /**
