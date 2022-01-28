@@ -12,6 +12,7 @@
                     ['label' => 'User', 'icon' => 'user', 'url' => ['/user']],
                     ['label' => 'Contact Form', 'icon' => 'handshake-o', 'url' => ['/contact-form']],
                     ['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
+                    ['label' => 'Users Channel', 'icon' => 'television', 'url' => ['/user-channel']],
                 ],
             ]
         ) ?>
