@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel backend\models\UserChannelSearch */
+/* @var $searchModel common\models\UserChannelSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'User Channels';
