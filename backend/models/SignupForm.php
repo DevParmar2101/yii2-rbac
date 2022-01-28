@@ -16,6 +16,9 @@ class SignupForm extends Model
     public $status;
     public $confirm_password;
     public $role;
+    public $first_name;
+    public $last_name;
+    public $dob;
 
 
     /**
@@ -30,6 +33,7 @@ class SignupForm extends Model
             ['username', 'string', 'min' => 2, 'max' => 255],
             [['status','last_name'], 'safe'],
             ['role', 'safe'],
+            [['first_name', 'last_name', 'dob'],'string'],
             ['email', 'trim'],
             ['email', 'required'],
             ['email', 'email'],
