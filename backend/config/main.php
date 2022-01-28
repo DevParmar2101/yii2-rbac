@@ -11,6 +11,7 @@ $params = array_merge(
 $baseUrl = str_replace('/backend/web', '/admin', (new Request)->getBaseUrl());
 
 return [
+    'name' => 'Yii-Rbac',
     'id' => 'app-backend',
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
