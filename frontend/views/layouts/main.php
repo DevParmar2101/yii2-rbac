@@ -26,7 +26,7 @@ AppAsset::register($this);
     <?php $this->beginBody() ?>
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
+        <div class="container-fluid">
             <a class="navbar-brand" href="#"><?= Yii::$app->name ?></a>
             <div class="collapse navbar-collapse" id="navbarText">
                 <ul class="navbar-nav mr-auto">
@@ -53,15 +53,14 @@ AppAsset::register($this);
                     </div>
                 <?php }else{?>
                     <div class="navbar-text">
-                        <div class="dropdown">
-
+                        <div class="dropdown dropleft">
                             <a class="nav-link" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown">
-                                <?= Yii::$app->user->identity->username?>
+                                <img src="<?= Yii::getAlias('@web/img/avatar5.png')?>" class="rounded-circle" width="30" height="30" alt="">
                             </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <a class="dropdown-item text-dark" href="#">Action</a>
-                                <a class="dropdown-item text-dark" href="#">Another action</a>
-                                <a class="dropdown-item text-dark" href="#">Something else here</a>
+                            <div class="dropdown-menu dropdown-menu-left dropd" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item text-dark" href="#">Profile</a>
+                                <a class="dropdown-item text-dark" href="#">Create Channel</a>
+                                <a class="dropdown-item text-dark" href="<?= \yii\helpers\Url::toRoute('site/logout')?>" data-method="post">Logout</a>
                             </div>
                         </div>
                     </div>
