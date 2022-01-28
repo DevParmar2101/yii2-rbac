@@ -4,7 +4,7 @@ namespace backend\controllers;
 
 use Yii;
 use common\models\ContactForm;
-use backend\models\ContactFormSearch;
+use common\models\ContactFormSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
