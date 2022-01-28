@@ -3,8 +3,9 @@ use yii\helpers\Html;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
-
-$user = \common\models\User::findOne(['id' => Yii::$app->user->identity->id]);
+if (!Yii::$app->user->isGuest) {
+    $user = \common\models\User::findOne(['id' => Yii::$app->user->identity->id]);
+}
 ?>
 
 <header class="main-header">
