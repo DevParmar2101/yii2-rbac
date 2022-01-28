@@ -12,7 +12,17 @@ class m220128_120423_create_contact_form extends Migration
      */
     public function safeUp()
     {
-
+        $query=<<<EOF
+CREATE TABLE `contact_form` (
+ `id` int(11) NOT NULL AUTO_INCREMENT,
+ `name` varchar(125) NOT NULL,
+ `email` varchar(125) NOT NULL,
+ `subject` varchar(125) NOT NULL,
+ `body` varchar(255) NOT NULL,
+ PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1
+EOF;
+        $this->execute($query);
     }
 
     /**
