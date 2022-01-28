@@ -1,19 +1,24 @@
 <?php
-
 namespace frontend\models;
 
 use Yii;
 use yii\base\Model;
-use common\models\User;
 
 /**
  * Signup form
  */
 class SignupForm extends Model
 {
+    public $id;
     public $username;
     public $email;
     public $password;
+    public $status;
+    public $confirm_password;
+    public $role;
+    public $first_name;
+    public $last_name;
+    public $dob;
 
 
     /**
@@ -26,59 +31,60 @@ class SignupForm extends Model
             ['username', 'required'],
             ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This username has already been taken.'],
             ['username', 'string', 'min' => 2, 'max' => 255],
-
+            [['status','last_name'], 'safe'],
+            ['role', 'safe'],
+            [['first_name', 'last_name', 'dob'],'string'],
+            [['first_name', 'last_name', 'dob'],'required'],
             ['email', 'trim'],
             ['email', 'required'],
             ['email', 'email'],
             ['email', 'string', 'max' => 255],
             ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This email address has already been taken.'],
-
-            ['password', 'required'],
-            ['password', 'string', 'min' => Yii::$app->params['user.passwordMinLength']],
+            ['id','integer'],
+            [['password'], 'required'],
+            [['confirm_password'], 'required','on' => 'admin-create'],
+            [['confirm_password'], 'required','on' => 'user-create'],
+            [['confirm_password'], 'compare', 'compareAttribute' => 'password','on' => 'admin-create'],
+            ['password', 'string', 'min' => Yii::$app->params['user.passwordMinLength'],'max'=>30],
         ];
     }
 
-    /**
-     * Signs user up.
-     *
-     * @return bool whether the creating new account was successful and email was sent
-     */
-    public function signup()
+    public function setUserSignup()
     {
-        if ($this->validate()) {
-            $user = new User();
-            $user->username = $this->username;
-            $user->email = $this->email;
-            $user->setPassword($this->password);
-            $user->generateAuthKey();
-            $user->generateEmailVerificationToken();
-            $user->save(false);
+        if (!$this->validate()) {
+            return false;
+        }
 
-            $auth = Yii::$app->authManager;
-            $authorRole = $auth->getRole('author');
-            $auth->assign($authorRole,$user->getId());
-
-            return $user;
+        $user = new \common\models\User();
+        $user->username = $this->username;
+        $user->email = $this->email;
+        $user->status = $this->status;
+        $user->setPassword($this->password);
+        $user->generateAuthKey();
+        $user->generateEmailVerificationToken();
+        if ($user->save()) {
+            if(isset($this->role) && $this->role!=""){
+                $auth = Yii::$app->authManager;
+                $authorRole = $auth->getRole($this->role);
+                $auth->assign($authorRole, $user->primaryKey);
+            }
+            return true;
         }
         return false;
     }
 
-    /**
-     * Sends confirmation email to user
-     * @param User $user user model to with email should be send
-     * @return bool whether the email was sent
-     */
-    protected function sendEmail($user)
+    public function attributeLabels()
     {
-        return Yii::$app
-            ->mailer
-            ->compose(
-                ['html' => 'emailVerify-html', 'text' => 'emailVerify-text'],
-                ['user' => $user]
-            )
-            ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name . ' robot'])
-            ->setTo($this->email)
-            ->setSubject('Account registration at ' . Yii::$app->name)
-            ->send();
+        return [
+            'status'=>'Is Active?'
+        ];
+    }
+
+    public static function getList()
+    {
+        return [
+            'admin' => 'Administator',
+            'user' => 'User'
+        ];
     }
 }
