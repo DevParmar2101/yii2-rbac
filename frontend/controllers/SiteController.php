@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use common\models\UserChannel;
 use frontend\models\ResendVerificationEmailForm;
 use frontend\models\VerifyEmailForm;
 use Yii;
@@ -148,7 +149,10 @@ class SiteController extends Controller
 
     public function actionChannel()
     {
-        return $this->render('channel');
+        $model = new UserChannel();
+        return $this->render('channel',[
+            'model' => $model
+        ]);
     }
 
     /**
