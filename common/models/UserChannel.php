@@ -13,9 +13,16 @@ use Yii;
  * @property int $channel_category
  * @property int $channel_sub_category
  * @property string $channel_bio
+ * @property string $channel_profile
+ * @property integer $status
  */
 class UserChannel extends \yii\db\ActiveRecord
 {
+    const ACTIVE = 1;
+    const INACTIVE = 0;
+    const IS_ACTIVE = 'Active';
+    const IS_INACTIVE = 'Inactive';
+
     /**
      * {@inheritdoc}
      */
@@ -30,9 +37,10 @@ class UserChannel extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'channel_name', 'channel_category', 'channel_sub_category', 'channel_bio'], 'required'],
-            [['user_id', 'channel_category', 'channel_sub_category'], 'integer'],
+            [['user_id', 'channel_name', 'channel_category', 'channel_sub_category', 'channel_bio', 'channel_profile', 'status'], 'required'],
+            [['user_id', 'channel_category', 'channel_sub_category', 'status'], 'integer'],
             [['channel_bio'], 'string'],
+            [['status'],'integer','max' => 2],
             [['channel_name'], 'string', 'max' => 225],
         ];
     }
@@ -49,6 +57,16 @@ class UserChannel extends \yii\db\ActiveRecord
             'channel_category' => 'Channel Category',
             'channel_sub_category' => 'Channel Sub Category',
             'channel_bio' => 'Channel Bio',
+            'channel_profile' => 'Channel Profile',
+            'status' => 'Status',
         ];
+    }
+
+    public function status()
+    {
+        return [
+            UserChannel::INACTIVE => UserChannel::IS_INACTIVE,
+            UserChannel::ACTIVE => UserChannel::IS_ACTIVE,
+            ];
     }
 }
