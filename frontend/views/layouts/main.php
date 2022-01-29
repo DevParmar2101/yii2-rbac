@@ -10,6 +10,9 @@ use yii\bootstrap4\Html;
 use yii\bootstrap4\Nav;
 use yii\bootstrap4\NavBar;
 
+if (!Yii::$app->user->isGuest){
+    $channel = \common\models\UserChannel::findOne(['user_id' => Yii::$app->user->identity->id]);
+}
 AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
@@ -27,7 +30,7 @@ AppAsset::register($this);
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#"><?= Yii::$app->name ?></a>
+            <a class="navbar-brand" href="<?= \yii\helpers\Url::toRoute('/')?>"><?= Yii::$app->name ?></a>
             <div class="collapse navbar-collapse" id="navbarText">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">

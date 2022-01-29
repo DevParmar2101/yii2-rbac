@@ -7,6 +7,7 @@ use frontend\models\ResendVerificationEmailForm;
 use frontend\models\VerifyEmailForm;
 use Yii;
 use yii\base\InvalidArgumentException;
+use yii\helpers\FileHelper;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
@@ -16,6 +17,7 @@ use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use common\models\ContactForm;
+use yii\web\UploadedFile;
 
 /**
  * Site controller
@@ -149,10 +151,45 @@ class SiteController extends Controller
 
     public function actionChannel()
     {
+        $path = __DIR__.'/../web/uploads/channel-profile';
+
+        if (!is_dir($path)) {
+            FileHelper::createDirectory($path,$mode = 0777, $recursive = true);
+        }
+
         $model = new UserChannel();
+        $channel_profile = null;
+
+        if ($model->channel_profile){
+            $channel_profile = $model->channel_profile;
+        }
+
+        if ($model->load(Yii::$app->request->post())) {
+            $profile = UploadedFile::getInstance($model,'channel_profile');
+
+            if ($profile) {
+                $model->channel_profile = $model->channel_name.'_'.date('Y-m-d_H:i').base64_decode($model->channel_id).'.'.$profile->extension;
+            }else{
+                $model->channel_profile = $channel_profile;
+            }
+            $model->user_id = Yii::$app->user->identity->id;
+            if ($model->save(false)) {
+                if ($profile) {
+                    $profile->saveAs('uploads/channel-profile/'.$model->channel_profile);
+                }
+
+                Yii::$app->session->setFlash('success','Your Channel is SuccessFully added');
+                return $this->refresh();
+            }
+        }
         return $this->render('channel',[
             'model' => $model
         ]);
+    }
+
+    public function actionProfile()
+    {
+
     }
 
     /**
