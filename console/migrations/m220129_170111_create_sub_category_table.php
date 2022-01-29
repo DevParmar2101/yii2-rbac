@@ -12,9 +12,14 @@ class m220129_170111_create_sub_category_table extends Migration
      */
     public function safeUp()
     {
-        $this->createTable('{{%sub_category}}', [
-            'id' => $this->primaryKey(),
-        ]);
+        $query =<<<EOF
+CREATE TABLE `sub_category` (
+ `id` int(11) NOT NULL AUTO_INCREMENT,
+ `category_id` int(11) NOT NULL,
+ PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1
+EOF;
+        $this->execute($query);
     }
 
     /**
