@@ -29,7 +29,7 @@ AppAsset::register($this);
     <?php $this->beginBody() ?>
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container-fluid">
+        <div class="container">
             <a class="navbar-brand" href="<?= \yii\helpers\Url::toRoute('/')?>"><?= Yii::$app->name ?></a>
             <div class="collapse navbar-collapse" id="navbarText">
                 <ul class="navbar-nav mr-auto">
@@ -56,7 +56,7 @@ AppAsset::register($this);
                     </div>
                 <?php }else{?>
                     <div class="navbar-text">
-                        <div class="dropdown dropleft">
+                        <div class="dropdown">
                             <a class="nav-link" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown">
                                 <img src="<?= Yii::getAlias('@web/img/avatar5.png')?>" class="rounded-circle" width="30" height="30" alt="">
                             </a>
