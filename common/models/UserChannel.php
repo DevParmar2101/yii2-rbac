@@ -14,7 +14,7 @@ use Yii;
  * @property int $channel_sub_category
  * @property string $channel_bio
  * @property string $channel_profile
- * @property integer $status
+ * @property int $status
  */
 class UserChannel extends \yii\db\ActiveRecord
 {
@@ -40,6 +40,8 @@ class UserChannel extends \yii\db\ActiveRecord
             [['user_id', 'channel_name', 'channel_category', 'channel_sub_category', 'channel_bio', 'channel_profile', 'status'], 'required'],
             [['user_id', 'channel_category', 'channel_sub_category', 'status'], 'integer'],
             [['channel_bio'], 'string'],
+            [['channel_name'], 'unique', 'targetClass' => '\common\models\User', 'message' => 'This username has already been taken.'],
+            [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
             [['status'],'integer','max' => 2],
             [['channel_name'], 'string', 'max' => 225],
         ];
@@ -62,6 +64,16 @@ class UserChannel extends \yii\db\ActiveRecord
         ];
     }
 
+    /**
+     * Gets query for [[User]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUser()
+    {
+        return $this->hasOne(User::className(), ['id' => 'user_id']);
+
+    }
     public function status()
     {
         return [
