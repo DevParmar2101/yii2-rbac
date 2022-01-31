@@ -30,7 +30,7 @@ class Category extends \yii\db\ActiveRecord
         return [
             [['category', 'status'], 'required'],
             [['status'], 'integer'],
-            [['crreated_at'], 'safe'],
+            [['created_at'], 'safe'],
             [['category'], 'string', 'max' => 255],
         ];
     }
@@ -44,7 +44,7 @@ class Category extends \yii\db\ActiveRecord
             'id' => 'ID',
             'category' => 'Category',
             'status' => 'Status',
-            'crreated_at' => 'Crreated At',
+            'created_at' => 'Created At',
         ];
     }
 }
