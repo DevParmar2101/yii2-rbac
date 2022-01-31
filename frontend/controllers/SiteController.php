@@ -149,49 +149,6 @@ class SiteController extends Controller
         return $this->render('about');
     }
 
-    public function actionChannel()
-    {
-        $path = __DIR__.'/../web/uploads/channel-profile';
-
-        if (!is_dir($path)) {
-            FileHelper::createDirectory($path,$mode = 0777, $recursive = true);
-        }
-
-        $model = new UserChannel();
-        $channel_profile = null;
-
-        if ($model->channel_profile){
-            $channel_profile = $model->channel_profile;
-        }
-
-        if ($model->load(Yii::$app->request->post())) {
-            $profile = UploadedFile::getInstance($model,'channel_profile');
-
-            if ($profile) {
-                $model->channel_profile = $model->channel_name.'_'.date('Y-m-d_H:i').base64_decode($model->channel_id).'.'.$profile->extension;
-            }else{
-                $model->channel_profile = $channel_profile;
-            }
-            $model->user_id = Yii::$app->user->identity->id;
-            if ($model->save(false)) {
-                if ($profile) {
-                    $profile->saveAs('uploads/channel-profile/'.$model->channel_profile);
-                }
-
-                Yii::$app->session->setFlash('success','Your Channel is SuccessFully added');
-                return $this->refresh();
-            }
-        }
-        return $this->render('channel',[
-            'model' => $model
-        ]);
-    }
-
-    public function actionProfile()
-    {
-
-    }
-
     /**
      * Signs user up.
      *
@@ -302,4 +259,52 @@ class SiteController extends Controller
             'model' => $model
         ]);
     }
+
+    public function actionChannel()
+    {
+        $path = __DIR__.'/../web/uploads/channel-profile';
+
+        if (!is_dir($path)) {
+            FileHelper::createDirectory($path,$mode = 0777, $recursive = true);
+        }
+
+        $model = new UserChannel();
+        $channel_profile = null;
+
+        if ($model->channel_profile){
+            $channel_profile = $model->channel_profile;
+        }
+
+        if ($model->load(Yii::$app->request->post())) {
+            $profile = UploadedFile::getInstance($model,'channel_profile');
+
+            if ($profile) {
+                $model->channel_profile = $model->channel_name.'_'.date('Y-m-d_H:i').base64_decode($model->channel_id).'.'.$profile->extension;
+            }else{
+                $model->channel_profile = $channel_profile;
+            }
+            $model->user_id = Yii::$app->user->identity->id;
+            if ($model->save(false)) {
+                if ($profile) {
+                    $profile->saveAs('uploads/channel-profile/'.$model->channel_profile);
+                }
+
+                Yii::$app->session->setFlash('success','Your Channel is SuccessFully added');
+                return $this->refresh();
+            }
+        }
+        return $this->render('channel',[
+            'model' => $model
+        ]);
+    }
+
+    public function actionChannelList()
+    {
+        $model = UserChannel::find()
+            ->where(['user_id' => Yii::$app->user->identity->id, 'status' => UserChannel::ACTIVE])->asArray()->all();
+        return $this->render('channel-list',[
+            'model' => $model
+        ]);
+    }
+
 }
