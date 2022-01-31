@@ -12,7 +12,10 @@ class m220131_052816_alter_sub_category_table extends Migration
      */
     public function safeUp()
     {
-
+        $query =<<<EOF
+ALTER TABLE `sub_category` ADD `sub_category` VARCHAR(225) NOT NULL AFTER `category_id`; 
+EOF;
+        $this->execute($query);
     }
 
     /**
