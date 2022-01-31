@@ -9,6 +9,7 @@ use Yii;
  *
  * @property int $id
  * @property int $category_id
+ * @property string $sub_category
  */
 class SubCategory extends \yii\db\ActiveRecord
 {
@@ -28,6 +29,7 @@ class SubCategory extends \yii\db\ActiveRecord
         return [
             [['category_id'], 'required'],
             [['category_id'], 'integer'],
+            [['sub_category'], 'string']
         ];
     }
 
@@ -39,6 +41,7 @@ class SubCategory extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'category_id' => 'Category ID',
+            'sub_category' => 'Sub Category'
         ];
     }
 }
