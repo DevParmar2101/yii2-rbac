@@ -49,13 +49,16 @@ class SignupForm extends Model
         ];
     }
 
-    public function setUserSignup()
+    public function signup()
     {
         if (!$this->validate()) {
             return false;
         }
 
         $user = new \common\models\User();
+        $user->first_name = $this->first_name;
+        $user->last_name = $this->last_name;
+        $user->dob = $this->dob;
         $user->username = $this->username;
         $user->email = $this->email;
         $user->status = $this->status;
