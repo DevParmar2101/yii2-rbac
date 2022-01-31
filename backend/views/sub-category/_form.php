@@ -13,6 +13,7 @@ use yii\widgets\ActiveForm;
     <div class="box-body table-responsive">
 
         <?= $form->field($model, 'category_id')->textInput() ?>
+        <?= $form->field($model, 'sub_category')->textInput() ?>
 
     </div>
     <div class="box-footer">
