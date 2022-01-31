@@ -10,7 +10,7 @@ use Yii;
  * @property int $id
  * @property string $category
  * @property int $status
- * @property string $crreated_at
+ * @property string $created_at
  */
 class Category extends \yii\db\ActiveRecord
 {
