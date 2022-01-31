@@ -16,8 +16,6 @@ use yii\widgets\ActiveForm;
 
         <?= $form->field($model, 'status')->textInput() ?>
 
-        <?= $form->field($model, 'crreated_at')->textInput() ?>
-
     </div>
     <div class="box-footer">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success btn-flat']) ?>
