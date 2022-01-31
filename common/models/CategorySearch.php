@@ -19,7 +19,7 @@ class CategorySearch extends Category
     {
         return [
             [['id', 'status'], 'integer'],
-            [['category', 'crreated_at'], 'safe'],
+            [['category', 'created_at'], 'safe'],
         ];
     }
 
@@ -62,7 +62,7 @@ class CategorySearch extends Category
         $query->andFilterWhere([
             'id' => $this->id,
             'status' => $this->status,
-            'crreated_at' => $this->crreated_at,
+            'created_at' => $this->created_at,
         ]);
 
         $query->andFilterWhere(['like', 'category', $this->category]);
