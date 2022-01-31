@@ -19,6 +19,7 @@ class SubCategorySearch extends SubCategory
     {
         return [
             [['id', 'category_id'], 'integer'],
+            [['sub_category'], 'string']
         ];
     }
 
