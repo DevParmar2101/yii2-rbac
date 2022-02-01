@@ -14,6 +14,11 @@ use Yii;
  */
 class Category extends \yii\db\ActiveRecord
 {
+    const ACTIVE = 1;
+    const INACTIVE = 0;
+    const STATUS_ACTIVE = 'Active';
+    const STATUS_INACTIVE = 'Inactive';
+
     /**
      * {@inheritdoc}
      */
@@ -45,6 +50,13 @@ class Category extends \yii\db\ActiveRecord
             'category' => 'Category',
             'status' => 'Status',
             'created_at' => 'Created At',
+        ];
+    }
+    public function status()
+    {
+        return [
+            Category::ACTIVE => Category::STATUS_ACTIVE,
+            Category::INACTIVE => Category::STATUS_INACTIVE,
         ];
     }
 }

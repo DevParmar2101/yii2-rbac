@@ -44,4 +44,7 @@ class SubCategory extends \yii\db\ActiveRecord
             'sub_category' => 'Sub Category'
         ];
     }
+    public function category(){
+
+    }
 }
