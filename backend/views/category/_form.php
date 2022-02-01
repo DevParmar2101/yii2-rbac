@@ -14,7 +14,7 @@ use yii\widgets\ActiveForm;
 
         <?= $form->field($model, 'category')->textInput(['maxlength' => true]) ?>
 
-        <?= $form->field($model, 'status')->textInput() ?>
+        <?= $form->field($model, 'status')->dropDownList($model->status(),['prompt' => 'Select Status']) ?>
 
     </div>
     <div class="box-footer">
