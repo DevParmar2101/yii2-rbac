@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use common\models\SubCategory;
 use common\models\UserChannel;
 use frontend\models\ResendVerificationEmailForm;
 use frontend\models\VerifyEmailForm;
@@ -296,6 +297,26 @@ class SiteController extends Controller
         return $this->render('channel',[
             'model' => $model
         ]);
+    }
+
+    public function actionLists($id)
+    {   $sub_category = new SubCategory();
+        $countCategory = SubCategory::find()
+            ->where(['category_id' => $id])
+            ->count();
+
+        $sub_category = SubCategory::find()
+            ->where(['category_id' => $id])
+            ->all();
+
+        if ($countCategory > 0)
+        {
+            foreach ($sub_category as $category){
+                echo "<option value='". $category->id ."'>". $category->sub_category ."</option>";
+            }
+        }else{
+            echo "<option>No Branch Found</option>";
+        }
     }
 
     public function actionChannelList()
