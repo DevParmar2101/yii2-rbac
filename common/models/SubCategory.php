@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "sub_category".
@@ -45,6 +46,6 @@ class SubCategory extends \yii\db\ActiveRecord
         ];
     }
     public function category(){
-
+        return ArrayHelper::map(Category::find()->where(['status' => Category::ACTIVE])->all(),'id','category');
     }
 }
