@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model common\models\Category */
 
-$this->title = $model->id;
+$this->title = $model->category;
 $this->params['breadcrumbs'][] = ['label' => 'Categories', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -20,15 +20,25 @@ $this->params['breadcrumbs'][] = $this->title;
                 'method' => 'post',
             ],
         ]) ?>
+        <?= Html::a('Back',['category/index'],['class' => 'btn btn-warning btn-flat'])?>
     </div>
     <div class="box-body table-responsive no-padding">
         <?= DetailView::widget([
             'model' => $model,
             'attributes' => [
-                'id',
+
                 'category',
-                'status',
-                'crreated_at',
+                [
+                        'attribute' => 'status',
+                        'value' => function($model) {
+                            if ($model->status == \common\models\Category::ACTIVE) {
+                                return \common\models\Category::STATUS_ACTIVE;
+                            }else {
+                                return \common\models\Category::STATUS_INACTIVE;
+                            }
+                        }
+                ],
+                'created_at',
             ],
         ]) ?>
     </div>
