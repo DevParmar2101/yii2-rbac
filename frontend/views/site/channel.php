@@ -23,10 +23,24 @@ use yii\bootstrap4\Html;
     </div>
     <div class="row">
         <div class="col-lg-6">
-            <?= $form->field($model,'channel_category')->textInput()?>
+            <?= $form->field($model,'channel_category')->dropdownList(
+                    \yii\helpers\ArrayHelper::map(\common\models\Category::find()->where(['status' => \common\models\Category::ACTIVE])->all(),'id' ,'category'),
+                [
+                        'prompt' => 'Select Category ...',
+                        'onchange' => '
+                        $.post("lists?id='.'"+$(this).val(), function( data ) {
+                    $("select#userchannel-channel_sub_category").html( data );
+                });'
+                ]
+            )?>
         </div>
         <div class="col-lg-6">
-            <?= $form->field($model,'channel_sub_category')->textInput() ?>
+            <?= $form->field($model,'channel_sub_category')->dropdownList(
+                    \yii\helpers\ArrayHelper::map(\common\models\SubCategory::find()->all(),'id','sub_category'),
+                [
+                        'prompt' => 'Select Sub Category...',
+                ]
+            ) ?>
         </div>
     </div>
     <div class="row">
