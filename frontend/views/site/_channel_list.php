@@ -15,11 +15,11 @@ use yii\helpers\Html;
             <a href="<?= \yii\helpers\Url::toRoute(['channel/overview','channel_uid' => $model->channel_id])?>" class="btn btn-sm btn-primary">
                 View
             </a>
-            <a href="<?= \yii\helpers\Url::toRoute(['channel/overview','channel_uid' => $model->channel_id])?>" class="btn btn-sm btn-primary">
+            <a href="<?= \yii\helpers\Url::toRoute(['channel/edit','channel_uid' => $model->channel_id])?>" class="btn btn-sm btn-primary">
                 Edit
             </a>
         </div>
         <div class="card-footer">
-            <small class="text-muted">Created at: <?= Yii::$app->formatter->asDate($model->cre)?></small>
+            <small class="text-muted">Created at: <?= Yii::$app->formatter->asDate($model->created_at)?></small>
         </div>
     </div>

@@ -15,6 +15,7 @@ use Yii;
  * @property string $channel_bio
  * @property string $channel_profile
  * @property int $status
+ * @property string $created_at
  */
 class UserChannel extends \yii\db\ActiveRecord
 {
@@ -40,6 +41,7 @@ class UserChannel extends \yii\db\ActiveRecord
             [['user_id', 'channel_name', 'channel_category', 'channel_sub_category', 'channel_bio', 'channel_profile', 'status'], 'required'],
             [['user_id', 'channel_category', 'channel_sub_category', 'status'], 'integer'],
             [['channel_bio'], 'string'],
+            [['created_at'], 'safe'],
             [['channel_name'], 'unique', 'targetClass' => '\common\models\User', 'message' => 'This username has already been taken.'],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
             [['status'],'integer','max' => 2],

@@ -8,6 +8,7 @@ use frontend\models\ResendVerificationEmailForm;
 use frontend\models\VerifyEmailForm;
 use Yii;
 use yii\base\InvalidArgumentException;
+use yii\data\ActiveDataProvider;
 use yii\helpers\FileHelper;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
@@ -321,10 +322,12 @@ class SiteController extends Controller
 
     public function actionChannelList()
     {
-        $model = UserChannel::find()
-            ->where(['user_id' => Yii::$app->user->identity->id, 'status' => UserChannel::ACTIVE])->asArray()->all();
+        $channel_list = new ActiveDataProvider([
+            'query' => UserChannel::find()->where(['user_id' => Yii::$app->user->identity->id])
+        ]);
+
         return $this->render('channel-list',[
-            'model' => $model
+            'channel_list' => $channel_list
         ]);
     }
 

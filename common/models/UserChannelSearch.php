@@ -19,7 +19,7 @@ class UserChannelSearch extends UserChannel
     {
         return [
             [['channel_id', 'user_id', 'channel_category', 'channel_sub_category'], 'integer'],
-            [['channel_name', 'channel_bio'], 'safe'],
+            [['channel_name', 'channel_bio', 'created_at'], 'safe'],
         ];
     }
 
@@ -62,6 +62,7 @@ class UserChannelSearch extends UserChannel
             'user_id' => $this->user_id,
             'channel_category' => $this->channel_category,
             'channel_sub_category' => $this->channel_sub_category,
+            'created_at' => $this->created_at,
         ]);
 
         $query->andFilterWhere(['like', 'channel_name', $this->channel_name])
