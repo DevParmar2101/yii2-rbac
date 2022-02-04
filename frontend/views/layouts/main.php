@@ -62,7 +62,7 @@ AppAsset::register($this);
                             </a>
                             <div class="dropdown-menu dropdown-menu-left dropd" aria-labelledby="navbarDropdownMenuLink">
                                 <a class="dropdown-item text-dark" href="#">Profile</a>
-                                <a class="dropdown-item text-dark" href="<?= \yii\helpers\Url::toRoute('/site/channel-list')?>">Channel Lists</a>
+                                <a class="dropdown-item text-dark" href="<?= \yii\helpers\Url::toRoute('/channel/channel-list')?>">Channel Lists</a>
                                 <a class="dropdown-item text-dark" href="<?= \yii\helpers\Url::toRoute('/site/channel')?>">Create Channel</a>
                                 <a class="dropdown-item text-dark" href="<?= \yii\helpers\Url::toRoute('site/logout')?>" data-method="post">Logout</a>
                             </div>

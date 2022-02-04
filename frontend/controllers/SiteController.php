@@ -320,15 +320,6 @@ class SiteController extends Controller
         }
     }
 
-    public function actionChannelList()
-    {
-        $channel_list = new ActiveDataProvider([
-            'query' => UserChannel::find()->where(['user_id' => Yii::$app->user->identity->id])
-        ]);
 
-        return $this->render('channel-list',[
-            'channel_list' => $channel_list
-        ]);
-    }
 
 }
