@@ -12,10 +12,10 @@ use yii\helpers\Html;
         <div class="card-body">
             <h5 class="card-title"><?= $model->channel_name?></h5>
             <p class="card-text"><?= strlen($model->channel_bio) > 125 ? substr($model->channel_bio,0,125).'...':$model->channel_bio?></p>
-            <a href="<?= \yii\helpers\Url::toRoute(['channel/overview','channel_uid' => $model->channel_id])?>" class="btn btn-sm btn-primary">
+            <a href="<?= \yii\helpers\Url::toRoute(['channel/overview','channel_id' => $model->channel_id])?>" class="btn btn-sm btn-primary">
                 View
             </a>
-            <a href="<?= \yii\helpers\Url::toRoute(['channel/edit','channel_uid' => $model->channel_id])?>" class="btn btn-sm btn-primary">
+            <a href="<?= \yii\helpers\Url::toRoute(['channel/edit','channel_id' => $model->channel_id])?>" class="btn btn-sm btn-secondary">
                 Edit
             </a>
         </div>
