@@ -11,6 +11,8 @@ use yii\helpers\ArrayHelper;
  * @property int $id
  * @property int $category_id
  * @property string $sub_category
+ *
+ * @property Category $category
  */
 class SubCategory extends \yii\db\ActiveRecord
 {
@@ -47,5 +49,15 @@ class SubCategory extends \yii\db\ActiveRecord
     }
     public function category(){
         return ArrayHelper::map(Category::find()->where(['status' => Category::ACTIVE])->all(),'id','category');
+    }
+
+    /**
+     * Gets query for [[Category]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCategory()
+    {
+        return $this->hasOne(Category::className(), ['id' => 'category_id']);
     }
 }

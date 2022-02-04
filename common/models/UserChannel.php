@@ -16,6 +16,9 @@ use Yii;
  * @property string $channel_profile
  * @property int $status
  * @property string $created_at
+ *
+ * @property Category $category
+ * @property Category $sub
  */
 class UserChannel extends \yii\db\ActiveRecord
 {
@@ -82,5 +85,24 @@ class UserChannel extends \yii\db\ActiveRecord
             UserChannel::INACTIVE => UserChannel::IS_INACTIVE,
             UserChannel::ACTIVE => UserChannel::IS_ACTIVE,
             ];
+    }
+
+    /**
+     * Gets query for [[Category]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCategory()
+    {
+        return $this->hasOne(Category::className(), ['id' => 'channel_category']);
+    }
+    /**
+     * Gets query for [[Category]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getSub()
+    {
+        return $this->hasOne(SubCategory::className(), ['id' => 'channel_sub_category']);
     }
 }
