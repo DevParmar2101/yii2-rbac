@@ -23,7 +23,12 @@ $this->params['breadcrumbs'][] = $this->title;
             'columns' => [
                 ['class' => 'yii\grid\SerialColumn'],
 
-                'category_id',
+                [
+                        'attribute' => 'category_id',
+                        'value' => function($model){
+                            return $model->category->category;
+                        }
+                ],
                 'sub_category',
 
                 ['class' => 'yii\grid\ActionColumn'],
