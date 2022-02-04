@@ -7,8 +7,9 @@ use yii\helpers\Html;
 
 ?>
     <div class="card">
-        <a href=""></a>
+        <a href="#">
         <img class="card-img-top channel-list" src="<?= Yii::getAlias('@web/uploads/channel-profile/'.$model->channel_profile)?>"  alt="Card image cap">
+        </a>
         <div class="card-body">
             <h5 class="card-title"><?= $model->channel_name?></h5>
             <p class="card-text"><?= strlen($model->channel_bio) > 125 ? substr($model->channel_bio,0,125).'...':$model->channel_bio?></p>
