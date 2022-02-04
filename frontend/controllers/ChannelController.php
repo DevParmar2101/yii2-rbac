@@ -33,11 +33,12 @@ class ChannelController extends Controller
             'channel_detail' => $channel_detail,
         ]);
     }
-    public function actionEdit($channel_id){
-        $channel_detail = $this->findModel($channel_id);
+    public function actionEdit($channel_id)
+    {
+        $model = $this->findModel($channel_id);
 
         return $this->render('edit',[
-            'channel_detail' => $channel_detail
+            'model' => $model
         ]);
     }
     /**
