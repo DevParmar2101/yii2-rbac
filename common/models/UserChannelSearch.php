@@ -19,7 +19,7 @@ class UserChannelSearch extends UserChannel
     {
         return [
             [['channel_id', 'user_id', 'channel_category', 'channel_sub_category'], 'integer'],
-            [['channel_name', 'channel_bio', 'created_at'], 'safe'],
+            [['channel_name', 'channel_bio', 'channel_banner','created_at'], 'safe'],
         ];
     }
 
