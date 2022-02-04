@@ -115,7 +115,7 @@ class UserChannelController extends Controller
      */
     protected function findModel($channel_id)
     {
-        if (($model = UserChannel::findOne($id)) !== null) {
+        if (($model = UserChannel::findOne($channel_id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
