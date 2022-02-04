@@ -14,6 +14,7 @@ use Yii;
  * @property int $channel_sub_category
  * @property string $channel_bio
  * @property string $channel_profile
+ * @property string $channel_banner
  * @property int $status
  * @property string $created_at
  *
