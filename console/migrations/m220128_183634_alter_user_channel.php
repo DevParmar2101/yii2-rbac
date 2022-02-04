@@ -17,6 +17,7 @@ ALTER TABLE `user_channel` ADD UNIQUE(`channel_name`);
 ALTER TABLE `user_channel` ADD `channel_profile` VARCHAR(225) NOT NULL AFTER `channel_bio`, ADD `status` SMALLINT(2) NOT NULL AFTER `channel_profile`; 
 ALTER TABLE `user_channel` ADD FOREIGN KEY (`user_id`) REFERENCES `user`(`id`) ON DELETE RESTRICT ON UPDATE RESTRICT; 
 ALTER TABLE `user_channel` ADD `created_at` TIMESTAMP NOT NULL AFTER `status`; 
+ALTER TABLE `user_channel` ADD `channel_banner` VARCHAR(125) NOT NULL AFTER `channel_profile`;
 EOF;
     $this->execute($query);
     }
