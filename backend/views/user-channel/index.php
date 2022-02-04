@@ -23,12 +23,19 @@ $this->params['breadcrumbs'][] = $this->title;
             'columns' => [
                 ['class' => 'yii\grid\SerialColumn'],
 
-//                'channel_id',
-//                'user_id',
                 'channel_name',
-                'channel_category',
-                'channel_sub_category',
-                // 'channel_bio:ntext',
+                [
+                        'attribute' => 'channel_category',
+                        'value' => function($model){
+                            return $model->category->category;
+                        }
+                ],
+                [
+                        'attribute' => 'channel_sub_category',
+                        'value' => function($model){
+                            return $model->sub->sub_category;
+                        }
+                ],
 
                 ['class' => 'yii\grid\ActionColumn'],
             ],
