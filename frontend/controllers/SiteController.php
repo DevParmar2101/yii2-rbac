@@ -265,9 +265,14 @@ class SiteController extends Controller
     public function actionChannel()
     {
         $path = __DIR__.'/../web/uploads/channel-profile';
+        $path_1 = __DIR__.'/../web/uploads/channel-banner';
 
         if (!is_dir($path)) {
             FileHelper::createDirectory($path,$mode = 0777, $recursive = true);
+        }
+
+        if (!is_dir($path_1)) {
+            FileHelper::createDirectory($path_1,$mode = 0777, $recursive = true);
         }
 
         $model = new UserChannel();
@@ -275,20 +280,33 @@ class SiteController extends Controller
 
         if ($model->channel_profile){
             $channel_profile = $model->channel_profile;
+            $channel_banner = $model->channel_banner;
         }
 
         if ($model->load(Yii::$app->request->post())) {
             $profile = UploadedFile::getInstance($model,'channel_profile');
+            $banner = UploadedFile::getInstance($model,'channel_banner');
 
             if ($profile) {
                 $model->channel_profile = $model->channel_name.'_'.date('Y-m-d_H:i').base64_decode($model->channel_id).'.'.$profile->extension;
             }else{
                 $model->channel_profile = $channel_profile;
             }
+
+            if ($banner) {
+                $model->channel_banner = $model->channel_banner.'_'.date('Y-m-d_H:i').base64_decode($model->channel_id).'.'.$banner->extension;
+            }else{
+                $model->channel_banner = $channel_banner;
+            }
+
             $model->user_id = Yii::$app->user->identity->id;
             if ($model->save(false)) {
                 if ($profile) {
                     $profile->saveAs('uploads/channel-profile/'.$model->channel_profile);
+                }
+
+                if ($banner) {
+                    $banner->saveAs('uploads/channel-banner/'.$model->channel_banner);
                 }
 
                 Yii::$app->session->setFlash('success','Your Channel is SuccessFully added');
